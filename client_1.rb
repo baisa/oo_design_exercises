@@ -16,3 +16,4 @@ customer_1.add_rentals(rental_2)
 customer_1.add_rentals(rental_3)
 
 puts customer_1.statement
+puts customer_1.short_statement
