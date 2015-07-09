@@ -33,6 +33,24 @@ class Customer
     @rentals << arg
   end
 
+  def hash_statement
+    hash = {movies:[["titanic", 3],["Peppa", 1]], points: 3, total: 20.0}
+    result = "Rental Record for #{@name}\n"
+
+    hash[:movies].each do |movie|
+      result += "\t #{movie[0]} #{movie[1]}\n"
+    end
+
+    result += "Amount owed is #{hash[:total]}\n"
+    result += "You earned #{hash[:points]} frequent renter points"
+    result
+  end
+
+  def calculate_hash
+    puts 'foooooo'
+    p @rentals
+  end
+
   def statement
     total_amount, frequent_renter_points = 0, 0
     result = "Rental Record for #{@name}\n"
