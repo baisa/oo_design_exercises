@@ -23,6 +23,6 @@ class TestRental < Minitest::Test
   end
 
   def expected_hash
-    hash = {movies:[["Titanic", 3],["Peppa", 1], ["Hair", 0]], points: 3, total: 20.0}
+    hash = {movies:[["Titanic", 3],["Peppa", 3.0], ["Hair", 14.0]], points: 3, total: 20.0}
   end
 end

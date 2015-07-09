@@ -19,3 +19,4 @@ puts customer_1.statement
 puts customer_1.short_statement
 puts "----\n"
 puts customer_1.hash_statement
+puts customer_1.calculate_hash

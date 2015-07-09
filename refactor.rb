@@ -33,8 +33,9 @@ class Customer
     @rentals << arg
   end
 
-  def hash_statement
-    hash = {movies:[["titanic", 3],["Peppa", 1]], points: 3, total: 20.0}
+  def statement
+    # hash = {movies:[["titanic", 3],["Peppa", 1]], points: 3, total: 20.0}
+    hash = hash_statement
     result = "Rental Record for #{@name}\n"
 
     hash[:movies].each do |movie|
@@ -47,11 +48,42 @@ class Customer
   end
 
   def calculate_hash
-    puts 'foooooo'
-    p @rentals
+    hash = {}
+    table = []
+
+    total_amount, frequent_renter_points = 0, 0
+    @rentals.each do |element|
+      this_amount = 0
+      case element.movie.price_code
+      when Movie::REGULAR
+        this_amount += 2
+        this_amount += (element.days_rented - 2) * 1.5 if element.days_rented > 2
+      when Movie::NEW_RELEASE
+        this_amount += element.days_rented * 3
+      when Movie::CHILDRENS
+        this_amount += 1.5
+        this_amount += (element.days_rented - 3) * 1.5 if element.days_rented > 3
+      end
+      table << [element.movie.title, this_amount.to_s]
+      frequent_renter_points += 1
+      if element.movie.price_code == Movie::NEW_RELEASE && element.days_rented > 1
+        frequent_renter_points += 1
+      end
+      total_amount += this_amount
+    end
+
+    #tried this
+    #@rentals.each do |element|
+     # table << [element.movie.title, element.this_amount.to_s]
+    #end
+    hash[:movies] = table
+    hash[:points] = frequent_renter_points
+    hash[:total] = total_amount
+    hash 
+
   end
 
-  def statement
+  def statement2
     total_amount, frequent_renter_points = 0, 0
     result = "Rental Record for #{@name}\n"
 
@@ -78,6 +110,7 @@ class Customer
       result += "\t" + element.movie.title + "\t" + this_amount.to_s + "\n"
       total_amount += this_amount
     end
+   
 
     #add footer lines
     result += "Amount owed is #{total_amount}\n"
