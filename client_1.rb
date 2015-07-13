@@ -1,4 +1,4 @@
-require_relative "refactor.rb"
+require_relative "lib/application.rb"
 
 movie_1 = Movie.new("Hair", Movie::REGULAR)
 movie_2 = Movie.new("Titanic", Movie::NEW_RELEASE)
